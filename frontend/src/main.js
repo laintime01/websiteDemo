@@ -3,9 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "bootstrap/dist/css/bootstrap.css"; //install bootstrap first
+import BootstrapVue from "bootstrap-vue";
 
 Vue.config.productionTip = false;
-Vue.use(require("bootstrap-vue/dist/bootstrap-vue.common.min"));
+Vue.use(BootstrapVue);
 
 new Vue({
   router,

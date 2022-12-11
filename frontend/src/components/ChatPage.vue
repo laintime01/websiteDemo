@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { talkToOpenai } from "@/api";
 export default {
   name: "ChatPage",
   data() {
@@ -52,6 +53,11 @@ export default {
         prompt: this.openai_prompt,
       };
       console.log(payLoad);
+    },
+    talkToServer(payLoad) {
+      talkToOpenai(payLoad).then((res) => {
+        console.log(res);
+      });
     },
   },
 };
