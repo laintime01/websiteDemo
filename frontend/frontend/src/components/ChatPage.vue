@@ -27,6 +27,9 @@
           </div>
         </div>
       </div>
+      <div style="margin-top: 20px">
+        <b-table striped hover :items="items"></b-table>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +41,7 @@ export default {
   data() {
     return {
       talk_text: "",
+      items: [],
     };
   },
   props: {
@@ -49,8 +53,15 @@ export default {
         prompt: this.talk_text,
       };
       onTalkApi(payLoad).then((res) => {
-        console.log(res);
+        this.items.push(
+          { a: "User:", content: this.talk_text },
+          { a: "AI:", content: res.data.message }
+        );
+        this.clear_text();
       });
+    },
+    clear_text() {
+      this.talk_text = "";
     },
   },
 };
