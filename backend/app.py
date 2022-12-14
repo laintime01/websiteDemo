@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 import os
 import openai
+import json
 
 app = Flask(__name__)
 
@@ -22,9 +23,21 @@ def hello_world():  # put application's code here
     return response.choices[0].text
 
 
-@app.route('/ontalk')
+@app.route('/ontalk', methods=['POST'])
 def chat():
-    return 'talk'
+    response_object = {'status': 'success'}
+    data = request.get_json()
+    res = openai.Completion.create(
+        model='text-davinci-001',
+        prompt=data.get('prompt'),
+        temperature=0.4,
+        max_tokens=64,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
+    )
+    response_object['message'] = res.choices[0].text
+    return jsonify(response_object)
 
 
 if __name__ == '__main__':
