@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { onTalkApi } from "@/api/chat";
 export default {
   name: "ChatPage",
   data() {
@@ -45,9 +46,11 @@ export default {
   methods: {
     onTalk() {
       const payLoad = {
-        some: this.talk_text,
+        prompt: this.talk_text,
       };
-      console.log(payLoad);
+      onTalkApi(payLoad).then((res) => {
+        console.log(res);
+      });
     },
   },
 };

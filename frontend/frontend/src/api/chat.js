@@ -1,6 +1,6 @@
 import requests from "@/request";
 
-export function onTalk(data) {
+export function onTalkApi(data) {
   return requests({
     url: "/ontalk",
     method: "post",
